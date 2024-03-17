@@ -56,8 +56,8 @@ GOOGLE_API_KEY="AIzaSyB8_22cX5EZaLoU51Ljwh8d2zIQaV51JFc"
 Description for each variables are in the [.env.example](video-hub-web/.env.example) file. Below is an example .env file for web project.
 
 ```env
-BASE_APP_URL="http://localhost:3000"
-BASE_SOCKET_URL="http://localhost:3001"
+VITE_BASE_APP_URL="http://localhost:3000"
+VITE_BASE_SOCKET_URL="http://localhost:3001"
 ```
 
 ## Database initialization
@@ -153,8 +153,42 @@ http://localhost:4173
 
 ## Troubleshoot
 
+#### Docker problems
+
 - If you get **permission denied** error when running docker command, you can run docker command with sudo. For example:
 
 ```sh
 sudo docker build -t video-hub-api .
+```
+
+#### MongoDB problems
+
+If you get connection error when connect to mongodb in your local machine from video-hub-api docker. Change your **MONGO_CONNECTION_STRING** to:
+
+```
+mongodb://172.17.0.1:27017/video-hub?directConnection=true
+```
+
+And make sure your mongod service bind to all ip by editing **mongod.conf**
+
+```sh
+sudo nano /etc/mongod.conf
+```
+
+Change the line
+
+```
+bindIp: 127.0.0.1
+```
+
+To
+
+```
+bindIpAll: true
+```
+
+Then save the **mongod.conf** file and restart mongod service
+
+```sh
+sudo systemctl restart mongod
 ```
