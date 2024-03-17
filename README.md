@@ -38,9 +38,9 @@ cd video-hub-web
 npm install
 ```
 
-3.1. Configure api project by creating an .env file in the video-hub-web folder then add your necessary configuration to the .env file.
+3.1. Configure api project by creating an **.env** file in the video-hub-web folder then add your necessary configuration to the .env file.
 
-Description for each variables are in the [.env.example](video-hub-api/.env.example) file. Below is an example .env file for api project.
+Description for each variables are in the [.env.example](video-hub-api/.env.example) file. Below is an example **.env** file for api project.
 
 ```env
 NODE_ENV=development
@@ -51,9 +51,9 @@ JWT_SECRET_KEY="THIS IS MY SECRET KEY FOR THE JWT TOKEN GENERATION PROCESS"
 GOOGLE_API_KEY="AIzaSyB8_22cX5EZaLoU51Ljwh8d2zIQaV51JFc"
 ```
 
-3.2. Configure web project by creating an .env file in the video-hub-web folder then add your necessary configuration to the .env file.
+3.2. Configure web project by creating an **.env.local** file in the video-hub-web folder then add your necessary configuration to the **.env.local** file.
 
-Description for each variables are in the [.env.example](video-hub-web/.env.example) file. Below is an example .env file for web project.
+Description for each variables are in the [.env.example](video-hub-web/.env.example) file. Below is an example **.env.local** file for web project.
 
 ```env
 VITE_BASE_APP_URL="http://localhost:3000"
@@ -101,30 +101,36 @@ username: psbt002 | password: psbt@123456
 
 ## Production deployment
 
-Build production docker image for api project.
+#### API project
+
+1. Build production docker image for api project.
 
 ```sh
 cd video-hub-api
 docker build -t video-hub-api .
 ```
 
-Create and run docker container for api project. **path_to_env_file** is the path to your .env for the production environment. The .env file structure for the production environment is the same as the development environment.
+2. Create and run docker container for api project. **path_to_env_file** is the path to your **.env** for the production environment. The **.env** file structure for the production environment is the same as the development environment.
 
 ```sh
-docker run -p3434:3000 -p3435:3001 -env-file {path_to_env_file} --name=video-hub-api -d video-hub-api
+docker run -p3434:3000 -p3435:3001 --env-file {path_to_env_file} --name=video-hub-api -d video-hub-api
 ```
 
-Build production docker image for web project.
+#### WEB project
+
+1. Config web project for production mode by creating **.env.production** file in video-hub-web folder then add your necessary configuration to the **.env.production** file.
+
+2. Build production docker image for web project.
 
 ```sh
 cd video-hub-web
 docker build -t video-hub-web .
 ```
 
-Create and run docker container for web project. **path_to_env_file** is the path to your .env for the production environment. The .env file structure for the production environment is the same as the development environment.
+3. Create and run docker container for web project.
 
 ```sh
-docker run -p4173:8080 -env-file {path_to_env_file} --name=video-hub-web -d video-hub-web
+docker run -p4173:8080 --name=video-hub-web -d video-hub-web
 ```
 
 Access the production application or host production application to the internet using the following url.
