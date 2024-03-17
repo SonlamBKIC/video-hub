@@ -99,6 +99,22 @@ username: psbt001 | password: psbt@123456
 username: psbt002 | password: psbt@123456
 ```
 
+## Testing
+
+- Unit test
+
+```sh
+cd video-hub-api
+npm run test
+```
+
+- End to End test
+
+```sh
+cd video-hub-api
+npm run test:e2e
+```
+
 ## Production deployment
 
 #### API project
