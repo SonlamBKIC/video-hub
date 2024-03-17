@@ -87,7 +87,7 @@
       "^@configs/(.*)$": "<rootDir>/configs/$1",
       "^@domains/(.*)$": "<rootDir>/domains/$1",
       "^@helpers/(.*)$": "<rootDir>/helpers/$1",
-      "^@infrastructure/(.*)$": "<rootDir>/infrastructure/$1",
+      "^@infrastructures/(.*)$": "<rootDir>/infrastructures/$1",
       "^@modules/(.*)$": "<rootDir>/modules/$1",
       "^@subscribers/(.*)$": "<rootDir>/subscribers/$1",
       "^@utils/(.*)$": "<rootDir>/utils/$1"

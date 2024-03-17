@@ -6,6 +6,7 @@ import { CreateUserInput } from '@modules/users/input';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { LoginOutput } from '@modules/auth/output';
 import { Public } from '@modules/auth/decorators';
+import { LoginInput } from '@modules/auth/input';
 
 @Controller()
 export class AppController {
@@ -23,7 +24,7 @@ export class AppController {
 
   @Public()
   @Post('/login')
-  login(@Body() payload: CreateUserInput): Promise<LoginOutput> {
+  login(@Body() payload: LoginInput): Promise<LoginOutput> {
     const result = this.authService.login(payload);
     return result;
   }

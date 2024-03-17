@@ -38,7 +38,15 @@ export class VideosService {
     } else {
       resultVideo = await this.repository.update({
         youtubeId,
+        title: youtubeVideoData.snippet.title,
+        description: youtubeVideoData.snippet.description,
         shareCount: existedVideo.shareCount + 1,
+        statistics: {
+          viewCount: parseInt(youtubeVideoData.statistics.viewCount, 10),
+          likeCount: parseInt(youtubeVideoData.statistics.likeCount, 10),
+          favoriteCount: parseInt(youtubeVideoData.statistics.favoriteCount, 10),
+          commentCount: parseInt(youtubeVideoData.statistics.commentCount, 10),
+        },
       });
     }
 

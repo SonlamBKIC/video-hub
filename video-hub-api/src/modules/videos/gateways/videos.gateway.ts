@@ -1,5 +1,5 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { config } from 'src/config';
+import { config } from '../../../config';
 
 @WebSocketGateway(config.socketPort, { cors: true })
 export class VideosGateway {
