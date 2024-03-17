@@ -4,6 +4,6 @@ export interface Config {
 }
 
 export const config: Config = {
-  baseUrl: "http://localhost:3434",
-  baseSocketUrl: "http://localhost:3435",
+  baseUrl: import.meta.env.BASE_APP_URL || "http://localhost:3434",
+  baseSocketUrl: import.meta.env.BASE_SOCKET_URL || "http://localhost:3435",
 };

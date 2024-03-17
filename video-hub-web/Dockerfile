@@ -56,10 +56,11 @@ FROM node:18-alpine As production
 # Copy the bundled code from the build stage to the production image
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/package*.json ./
+COPY --chown=node:node --from=build /usr/src/app/vite.config.ts ./
 
 # Expose server port
-expose 3000
-expose 3001
+EXPOSE 8080
 
 # Start the server using the production build
-CMD [ "node", "dist/main.js" ]
+CMD [ "npm", "run", "preview" ]
