@@ -65,26 +65,30 @@ export const AppHeader: React.FC<unknown> = () => {
   };
 
   const register = async () => {
-    try {
-      await registerProxy(username, password);
-      openNotification("success", "Successfully registered");
-    } catch (error) {
-      openNotification("error", "Failed to register");
-      console.error(error);
-    }
+    await registerProxy(username, password);
+    openNotification("success", "Successfully registered");
   };
 
   const login = async () => {
+    const response = await loginProxy(username, password);
+    setAccessToken(response.access_token);
+    setAuthUser({ username });
+    setAuthenticated(true);
+    openNotification("success", "Successfully logged in");
+  };
+
+  const handleLoginRegisterButton = async () => {
     try {
-      const response = await loginProxy(username, password);
-      setAccessToken(response.access_token);
-      setAuthUser({ username });
-      setAuthenticated(true);
-      openNotification("success", "Successfully logged in");
+      await login();
     } catch (error: any) {
       if (error.response.data.statusCode === 404) {
-        await register();
-        await login();
+        try {
+          await register();
+          await login();
+        } catch (error) {
+          openNotification("error", "Failed to register");
+          console.error(error);
+        }
       } else {
         openNotification("error", "Invalid credentials");
       }
@@ -92,6 +96,8 @@ export const AppHeader: React.FC<unknown> = () => {
   };
 
   const logout = () => {
+    setUsername("");
+    setPassword("");
     setAuthenticated(false);
     setAccessToken("");
     setAuthUser({ username: "" });
@@ -160,7 +166,9 @@ export const AppHeader: React.FC<unknown> = () => {
                 ></Input>
               </Col>
               <Col span={2}>
-                <Button onClick={login}> Login / Register</Button>
+                <Button onClick={handleLoginRegisterButton}>
+                  Login / Register
+                </Button>
               </Col>
             </>
           )}
